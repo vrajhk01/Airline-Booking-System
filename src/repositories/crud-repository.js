@@ -1,4 +1,4 @@
-const Logger = require("../config");
+const { Logger } = require("../config");
 
 class CrudRepository {
   constructor(model) {
