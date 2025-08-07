@@ -46,3 +46,5 @@ Lets take a look inside the `src` folder
  ```
  npm run dev
  ```
+
+Made with reference from Sanket Singh (https://github.com/singhsanket143)
