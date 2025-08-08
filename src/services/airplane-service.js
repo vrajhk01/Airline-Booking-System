@@ -33,7 +33,26 @@ async function getAirplanes() {
   }
 }
 
+async function getAirplane(id) {
+  try {
+    const airplane = await airplaneRespository.get(id);
+    return airplane;
+  } catch (error) {
+    if (StatusCodes.NOT_FOUND) {
+      throw new AppError(
+        "The airplane you requested is not present",
+        StatusCodes.NOT_FOUND
+      );
+    }
+    throw new AppError(
+      "Some error occured while fetching details of airplane",
+      StatusCodes.BAD_REQUEST
+    );
+  }
+}
+
 module.exports = {
   createAirplane,
   getAirplanes,
+  getAirplane,
 };
