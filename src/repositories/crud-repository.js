@@ -43,7 +43,15 @@ class CrudRepository {
         id: id,
       },
     });
-    return response;
+    if (response[0] == 0) {
+      throw new Error(
+        "Resource not found for this airplane",
+        StatusCodes.NOT_FOUND
+      );
+    }
+
+    const updatedRecord = await this.model.findByPk(id);
+    return updatedRecord;
   }
 }
 

@@ -51,8 +51,24 @@ async function getAirplane(id) {
   }
 }
 
+async function updateAirplane(id, data) {
+  try {
+    const airplane = await airplaneRespository.update(id, data);
+    return airplane;
+  } catch (error) {
+    if (StatusCodes.NOT_FOUND) {
+      throw new AppError("This airplane does not exist", StatusCodes.NOT_FOUND);
+    }
+    throw new AppError(
+      "Some error occured while updating airplane",
+      StatusCodes.BAD_REQUEST
+    );
+  }
+}
+
 module.exports = {
   createAirplane,
   getAirplanes,
   getAirplane,
+  updateAirplane,
 };
