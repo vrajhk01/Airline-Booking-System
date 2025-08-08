@@ -4,7 +4,10 @@
   "description": "A basic started boilerplate project for node",
   "main": "index.js",
   "scripts": {
-    "dev": "node --watch src/index.js"
+    "dev": "node --watch src/index.js",
+    "mig:gen": "cd src && npx sequelize-cli migration:generate --name",
+    "mig:run": "cd src && npx sequelize-cli db:migrate",
+    "mig:undo": "cd src && npx sequelize-cli db:migrate:undo"
   },
   "author": "Vraj",
   "license": "ISC",
