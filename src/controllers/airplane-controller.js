@@ -63,9 +63,21 @@ async function updateAirplane(req, res) {
   }
 }
 
+async function deleteAirplane(req, res) {
+  try {
+    await AirplaneService.deleteAirplane(req.params.id);
+    res.status(StatusCodes.NO_CONTENT).json();
+  } catch (error) {
+    ErrorResponse.message = "Something went wrong while deleting airplane";
+    ErrorResponse.error = error;
+    res.status(error.statusCode).json(ErrorResponse);
+  }
+}
+
 module.exports = {
   createAirplane,
   getAirplanes,
   getAirplane,
   updateAirplane,
+  deleteAirplane,
 };

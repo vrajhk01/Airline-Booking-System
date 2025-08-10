@@ -38,7 +38,7 @@ async function getAirplane(id) {
     const airplane = await airplaneRespository.get(id);
     return airplane;
   } catch (error) {
-    if (StatusCodes.NOT_FOUND) {
+    if (error.statusCode == StatusCodes.NOT_FOUND) {
       throw new AppError(
         "The airplane you requested is not present",
         StatusCodes.NOT_FOUND
@@ -56,7 +56,22 @@ async function updateAirplane(id, data) {
     const airplane = await airplaneRespository.update(id, data);
     return airplane;
   } catch (error) {
-    if (StatusCodes.NOT_FOUND) {
+    if (error.statusCode == StatusCodes.NOT_FOUND) {
+      throw new AppError("This airplane does not exist", StatusCodes.NOT_FOUND);
+    }
+    throw new AppError(
+      "Some error occured while updating airplane",
+      StatusCodes.BAD_REQUEST
+    );
+  }
+}
+
+async function deleteAirplane(data) {
+  try {
+    const airplane = await airplaneRespository.destroy(data);
+    return airplane;
+  } catch (error) {
+    if (error.statusCode == StatusCodes.NOT_FOUND) {
       throw new AppError("This airplane does not exist", StatusCodes.NOT_FOUND);
     }
     throw new AppError(
@@ -71,4 +86,5 @@ module.exports = {
   getAirplanes,
   getAirplane,
   updateAirplane,
+  deleteAirplane,
 };

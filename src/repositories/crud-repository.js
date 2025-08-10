@@ -17,6 +17,12 @@ class CrudRepository {
         id: data,
       },
     });
+    if (!response) {
+      throw new AppError(
+        "Resource not found for this airplane",
+        StatusCodes.NOT_FOUND
+      );
+    }
     return response;
   }
 
